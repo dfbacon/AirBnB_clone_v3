@@ -104,3 +104,20 @@ class FileStorage:
     def close(self):
         """Close a session"""
         self.reload()
+
+    def get(self, cls, uid):
+        '''This is the 'get' method.
+
+        get retrieves one object.
+        Returns the object based on class name and ID; or None.
+        '''
+        pass
+
+    def count(self, cls=None):
+        '''This is the 'count' method.
+
+        count counts the number of objects in storage.
+        Returns number of objects in storage matching a given class name;
+        counts all objects if no name is passed.
+        '''
+        pass
