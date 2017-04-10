@@ -25,7 +25,10 @@ class TestApp(unittest.TestCase):
 
     def test_404(self):
         rv = self.app.get('/bad')
-        print(rv.data)
+        self.assertEqual(rv.status_code, 404)
+        self.assertEqual(rv.headers.get("Content-Type"), "application/json")
+        json_format = json.loads(str(rv.get_data(), encoding="utf-8"))
+        self.assertEqual(json_format.get("error"), "Not found")
 
 
 if __name__ == "__main__":
