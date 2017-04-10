@@ -37,7 +37,7 @@ def view_single_state(state_id=None):
     return jsonify(state.to_json())
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'])
+@app_views.route('/states/<state_id>/', methods=['DELETE'])
 def delete_state(state_id=None):
     '''This is the 'delete_state' method.
 
@@ -73,7 +73,7 @@ def create_state():
     return jsonify(state.to_json()), 201
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>/', methods=['PUT'])
 def update_state(state_id=None):
     '''This is the 'update_state' module.
 
