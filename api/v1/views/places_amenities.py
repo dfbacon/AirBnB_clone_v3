@@ -28,7 +28,6 @@ if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
         amenity = [storage.get("Amenity", i) for i in place.amenities]
         return jsonify(amenity)
 
-
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
                      methods=['DELETE'])
     def delete_place_amenity(place_id=None, amenity_id=None):
@@ -47,7 +46,6 @@ if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
                     place.save()
 
         return jsonify({}), 200
-
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
                      methods=['POST'])
@@ -85,7 +83,6 @@ else:
         amenity = [instance.to_json() for instance in place.amenities]
         return jsonify(amenity)
 
-
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
                      methods=['DELETE'])
     def delete_place_amenity(place_id=None, amenity_id=None):
@@ -104,7 +101,6 @@ else:
             return jsonify(place.amenities), 200
 
         return jsonify({}), 200
-
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
                      methods=['POST'])
