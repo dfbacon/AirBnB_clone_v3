@@ -15,13 +15,16 @@ from flask import jsonify
 @app_views.route('/status')
 def status():
     '''This is the 'status' method.
+
     Returns status as "OK"
     '''
     return jsonify({"status": "OK"})
 
+
 @app_views.route('/stats')
 def stats():
     '''This is the 'stats' method.
+
     Counts the number of objects by type.
     '''
 
