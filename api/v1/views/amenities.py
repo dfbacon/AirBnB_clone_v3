@@ -14,7 +14,7 @@ from flask import (abort, jsonify, make_response, request)
 @app_views.route('/amenities/', methods=['GET'])
 @app_views.route('/amenities/<amenity_id>', methods=['GET'])
 def view_amenity(amenity_id=None):
-    '''This is the 'amenity_id' method.
+    '''This is the 'view_amenity' method.
 
     Retrieves a given Amenity object.
     '''
