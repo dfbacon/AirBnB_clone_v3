@@ -84,7 +84,7 @@ class DBStorage:
         """
         self.__session.remove()
 
-    def get(self, cls, id):
+    def get(self, cls, uid):
         '''This is the 'get' method.
 
         get retrieves one object.
