@@ -29,11 +29,19 @@ class TestIndex(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        '''This is the 'setUpClass' method.
+
+        Set up for testing.
+        '''
         app.config['TESTING'] = True
         cls.app = app.test_client()
         cls.path = "/api/v1"
 
     def test_status(self):
+        '''This is the 'test_status' method.
+
+        Tests for the 'status' method.
+        '''
         rv = self.app.get('{}/status/'.format(self.path))
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
@@ -41,6 +49,10 @@ class TestIndex(unittest.TestCase):
         self.assertEqual(json_format.get("status"), "OK")
 
     def test_stats(self):
+        '''This is the 'test_stats' method.
+
+        Tests for the 'stats' method.
+        '''
         rv = self.app.get('{}/stats/'.format(self.path))
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
