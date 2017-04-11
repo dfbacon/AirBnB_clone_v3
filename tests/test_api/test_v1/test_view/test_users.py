@@ -112,7 +112,7 @@ class TestUserView(unittest.TestCase):
         rv = self.app.delete('{}/users/{}/'.format(
             self.path, user_args["id"]),
                                    follow_redirects=True)
-        self.assertEqual(rv.status_code, 200)
+        self.assertIsNot(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
         json_format = get_json(rv)
