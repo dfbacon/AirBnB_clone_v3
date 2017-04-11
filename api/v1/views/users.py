@@ -11,8 +11,8 @@ from api.v1.views import (app_views, User, storage)
 from flask import (abort, jsonify, make_response, request)
 
 
-@app_views.route('/users/', methods=['GET'])
-@app_views.route('/users/<user_id>', methods=['GET'])
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
+@app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def view_user(user_id=None):
     '''This is the 'user_id' method.
 
@@ -29,7 +29,7 @@ def view_user(user_id=None):
     return jsonify(user.to_json())
 
 
-@app_views.route('/users/<user_id>', methods=['DELETE'])
+@app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id=None):
     '''This is the 'delete_user' method.
 
@@ -43,7 +43,7 @@ def delete_user(user_id=None):
     return jsonify({}), 200
 
 
-@app_views.route('/users/', methods=['POST'])
+@app_views.route('/users/', methods=['POST'], strict_slashes=False)
 def create_user():
     '''This is the 'create_user' method.
 
@@ -66,7 +66,7 @@ def create_user():
     return jsonify(user.to_json()), 201
 
 
-@app_views.route('/users/<user_id>', methods=['PUT'])
+@app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id=None):
     '''This is the 'update_user' method.
 
