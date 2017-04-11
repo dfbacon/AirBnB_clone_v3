@@ -91,4 +91,4 @@ def update_user(user_id=None):
         setattr(user, key, value)
 
     user.save()
-    return jsonify(a.to_json()), 200
+    return jsonify(user.to_json()), 200
