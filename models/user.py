@@ -6,6 +6,7 @@ user module
 """
 from models.base_model import BaseModel, Base, Table, Column, String
 from sqlalchemy.orm import relationship, backref
+import hashlib
 from os import getenv
 
 
