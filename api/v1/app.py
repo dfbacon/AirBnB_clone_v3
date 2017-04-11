@@ -8,8 +8,8 @@ return the status of the API.
 
 '''
 from api.v1.views import app_views
-from flask import (Blueprint, Flask, jsonify, make_response)
-from flask_cors import (CORS, cross_origin)
+from flask import Blueprint, Flask, jsonify, make_response
+from flask_cors import CORS, cross_origin
 from models import storage
 from os import getenv
 
