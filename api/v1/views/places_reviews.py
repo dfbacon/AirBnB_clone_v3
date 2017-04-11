@@ -65,11 +65,12 @@ def create_review(place_id):
     try:
         r = request.get_json()
     except:
-        return "Not a JSON", 400
+        r = None
 
+    if r is None:
+        return "Not a JSON", 400
     if "user_id" not in r.keys():
         return "Missing user_id", 400
-
     if "text" not in r.keys():
         return "Missing text", 400
 

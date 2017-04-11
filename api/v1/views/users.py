@@ -51,13 +51,13 @@ def create_user():
     '''
     try:
         r = request.get_json()
-
     except:
-        return "Not a JSON", 400
+        r = None
 
+    if r is None:
+        return "Not a JSON", 400
     if 'email' not in r.keys():
         return "Missing email", 400
-
     if 'password' not in r.keys():
         return "Missing password", 400
 
@@ -74,8 +74,10 @@ def update_user(user_id=None):
     '''
     try:
         r = request.get_json()
-
     except:
+        r = None
+
+    if r is None:
         return "Not a JSON", 400
 
     user = storage.get("User", user_id)

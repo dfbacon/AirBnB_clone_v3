@@ -64,8 +64,10 @@ def create_state():
     try:
         r = request.get_json()
     except:
-        return "Not a JSON", 400
+        r = None
 
+    if r is None:
+        return "Not a JSON", 400
     if 'name' not in r.keys():
         return "Missing name", 400
 
@@ -83,6 +85,9 @@ def update_state(state_id=None):
     try:
         r = request.get_json()
     except:
+        r = None
+
+    if r is None:
         return "Not a JSON", 400
 
     state = storage.get("State", state_id)

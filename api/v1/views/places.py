@@ -73,14 +73,12 @@ def create_place(city_id):
 
     if r is None:
         return "Not a JSON", 400
-
     if 'user_id' not in r.keys():
         return "Missing user_id", 400
 
     user = storage.get("User", r.get("user_id"))
     if user is None:
         abort(404)
-
     if 'name' not in r.keys():
         return "Missing name", 400
 
