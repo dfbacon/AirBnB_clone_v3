@@ -60,8 +60,7 @@ class TestCityView(unittest.TestCase):
         city.save()
 
         rv = self.app.get('{}/states/{}/cities'.format(
-            self.path, self.state.id),
-                          follow_redirects=True)
+            self.path, self.state.id), follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -156,11 +155,10 @@ class TestCityView(unittest.TestCase):
         '''
         city_args = {"name": "TestCity", "id": "TC"}
 
-        rv = self.app.post('{}/states/{}/cities/'.format(
-            self.path, self.state.id),
+        rv = self.app.post('{}/states/{}/cities/'.format(self.path,
+                                                         self.state.id),
                            content_type="application/json",
-                           data=json.dumps(city_args),
-                           follow_redirects=True)
+                           data=json.dumps(city_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 201)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -179,11 +177,10 @@ class TestCityView(unittest.TestCase):
         '''
         city_args = {"name": "TestCity", "id": "TC"}
 
-        rv = self.app.post('{}/states/{}/cities/'.format(
-            self.path, self.state.id),
+        rv = self.app.post('{}/states/{}/cities/'.format(self.path,
+                                                         self.state.id),
                            content_type="application/json",
-                           data=city_args,
-                           follow_redirects=True)
+                           data=city_args, follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Not a JSON")
 
@@ -194,11 +191,10 @@ class TestCityView(unittest.TestCase):
         '''
         city_args = {"id": "TC2"}
 
-        rv = self.app.post('{}/states/{}/cities/'.format(
-            self.path, self.state.id),
+        rv = self.app.post('{}/states/{}/cities/'.format(self.path,
+                                                         self.state.id),
                            content_type="application/json",
-                           data=json.dumps(city_args),
-                           follow_redirects=True)
+                           data=json.dumps(city_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Missing name")
 
@@ -209,11 +205,9 @@ class TestCityView(unittest.TestCase):
         '''
         city_args = {"name": "TestCity", "id": "TB2"}
 
-        rv = self.app.post('{}/states/{}/cities/'.format(
-            self.path, "noID"),
+        rv = self.app.post('{}/states/{}/cities/'.format(self.path, "noID"),
                            content_type="application/json",
-                           data=json.dumps(city_args),
-                           follow_redirects=True)
+                           data=json.dumps(city_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
 
     def test_update_one_city_name(self):

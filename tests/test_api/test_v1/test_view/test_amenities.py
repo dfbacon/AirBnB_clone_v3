@@ -101,8 +101,7 @@ class TestAmenityView(unittest.TestCase):
         amenity.save()
 
         rv = self.app.delete('{}/amenities/{}/'.format(
-            self.path, amenity_args["id"]),
-                                   follow_redirects=True)
+            self.path, amenity_args["id"]), follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
