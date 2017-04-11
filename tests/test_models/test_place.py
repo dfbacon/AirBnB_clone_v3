@@ -1,6 +1,5 @@
 from datetime import datetime
 from models import *
-from models.place import PlaceAmenity
 import os
 import unittest
 
