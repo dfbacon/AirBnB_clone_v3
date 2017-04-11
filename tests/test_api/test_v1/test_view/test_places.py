@@ -70,8 +70,7 @@ class TestCityView(unittest.TestCase):
         place.save()
 
         rv = self.app.get('{}/cities/{}/places'.format(
-            self.path, self.city.id),
-                          follow_redirects=True)
+            self.path, self.city.id), follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -175,10 +174,10 @@ class TestCityView(unittest.TestCase):
         place_args = {"name": "test",
                       "user_id": self.user.id, "id": "TT"}
 
-        rv = self.app.post('{}/cities/{}/places/'.format(
-            self.path, self.city.id), content_type="application/json",
-                           data=json.dumps(place_args),
-                           follow_redirects=True)
+        rv = self.app.post('{}/cities/{}/places/'.format(self.path,
+                                                         self.city.id),
+                           content_type="application/json",
+                           data=json.dumps(place_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 201)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -199,10 +198,10 @@ class TestCityView(unittest.TestCase):
         place_args = {"name": "test",
                       "user_id": self.user.id, "id": "TT"}
 
-        rv = self.app.post('{}/cities/{}/places/'.format(
-            self.path, self.city.id), content_type="application/json",
-                           data=place_args,
-                           follow_redirects=True)
+        rv = self.app.post('{}/cities/{}/places/'.format(self.path,
+                                                         self.city.id),
+                           content_type="application/json",
+                           data=place_args, follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Not a JSON")
 
@@ -213,10 +212,10 @@ class TestCityView(unittest.TestCase):
         '''
         place_args = {"user_id": self.user.id, "id": "TT"}
 
-        rv = self.app.post('{}/cities/{}/places/'.format(
-            self.path, self.city.id), content_type="application/json",
-                           data=json.dumps(place_args),
-                           follow_redirects=True)
+        rv = self.app.post('{}/cities/{}/places/'.format(self.path,
+                                                         self.city.id),
+                           content_type="application/json",
+                           data=json.dumps(place_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Missing name")
 
@@ -227,8 +226,9 @@ class TestCityView(unittest.TestCase):
         '''
         place_args = {"name": "test", "id": "TT"}
 
-        rv = self.app.post('{}/cities/{}/places/'.format(
-            self.path, self.city.id), content_type="application/json",
+        rv = self.app.post('{}/cities/{}/places/'.format(self.path,
+                                                         self.city.id),
+                           content_type="application/json",
                            data=json.dumps(place_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Missing user_id")
@@ -240,8 +240,9 @@ class TestCityView(unittest.TestCase):
         '''
         place_args = {"name": "test", "user_id": "noID", "id": "TT"}
 
-        rv = self.app.post('{}/cities/{}/places/'.format(
-            self.path, self.city.id), content_type="application/json",
+        rv = self.app.post('{}/cities/{}/places/'.format(self.path,
+                                                         self.city.id),
+                           content_type="application/json",
                            data=json.dumps(place_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
 
@@ -254,8 +255,7 @@ class TestCityView(unittest.TestCase):
 
         rv = self.app.post('{}/cities/{}/places/'.format(self.path, "noID"),
                            content_type="application/json",
-                           data=json.dumps(place_args),
-                           follow_redirects=True)
+                           data=json.dumps(place_args), follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
 
     def test_update_place_name(self):
