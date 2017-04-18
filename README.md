@@ -6,15 +6,15 @@ Holberton School AirBnB Clone Project (v3)
 The purpose of this project is to recreate the AirBnB site, from the back-end data management to the front-end user interface.
 
 The end product will have:
-    o A website to display the final product
-    o An API that provides a communication interface between the front-end and your data
-    o A database or files that store data
-    o A command interpreter to manipulate data without a visual interface
+* A website to display the final product
+* An API that provides a communication interface between the front-end and your data
+* A database or files that store data
+* A command interpreter to manipulate data without a visual interface
 
 Usage
 -----
 To run, execute the console.py script:
-   ```python3 console.py``` or ```./console.py```
+* ```python3 console.py``` or ```./console.py```
 
 <h4>Classes</h4>
 * Amenity
