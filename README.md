@@ -37,36 +37,37 @@ To run, execute the console.py script:
   * ```<class name>.all()```
 
 * show: Show information about a specific object.
-  * **show <class name> <unique id>**
-  * **<class name>.show(<unique id>)**
+  * ```show <class name> <unique id>```
+  * ```<class name>.show(<unique id>)```
 
 * update: Update an instance of a class.
-  * **update <class name> <unique id> <attribute name> <attribute value>**
-  * **<class name>.update(<unique id>, <attribute name>, <attribute value>)**
-  * **<class name>.update(<unique id>, <dictionary representation>)**
+  * ```update <class name> <unique id> <attribute name> <attribute value>```
+  * ```<class name>.update(<unique id>, <attribute name>, <attribute value>)```
+  * ```<class name>.update(<unique id>, <dictionary representation>)```
 
 * destory: Destroy an instance of a class.
-  * **destroy <class name> <unique id>**
-  * **<class name>.destroy(<unique id>)**
+  * ```destroy <class name> <unique id>```
+  * ```<class name>.destroy(<unique id>)```
 
 * quit: Exit the program.
-  * **quit**
+  * ```quit```
 
 <h4>Additional Commands</h4>
 
 * count: Count and display the number of instances of a given class.
-  * **<class name>.count()**
+  * ```<class name>.count()```
 
 Versions
 --------
 <h4>Second Phase</h4>
 Command line interpretor can now save objects into a mysql database by setting the following environmental variables:
 
-	* MySQL user = <HBNB_MYSQL_USER>
-        * MySQL password = <HBNB_MYSQL_PWD>
-        * MySQL host = <HBNB_MYSQL_HOST> (typically = localhost)
-        * MySQL database = HBNB_MYSQL_DB
-        * HBNB_TYPE_STORAGE = db
+* MySQL user = ```<HBNB_MYSQL_USER>```
+* MySQL password = ```<HBNB_MYSQL_PWD>```
+* MySQL host = ```<HBNB_MYSQL_HOST>```
+  * (typically = localhost)
+* MySQL database = ```HBNB_MYSQL_DB```
+* HBNB_TYPE_STORAGE = ```db```
 
 <h4>First Phase</h4>
 Creation of command line interpreter to access objects that will store user data. Users can use the console to create objects, update object attributes, remove objects, list all objects, and store and read data from a .json file.
@@ -74,35 +75,35 @@ Creation of command line interpreter to access objects that will store user data
 Project Requirements
 --------------------
 <h4>Python Requirements</h4>
-* All programs are compiled Ubuntu 14.04 LTS using python3 (version 3.4.3)
-* All code conforms to [PEP 8] (https://www.python.org/dev/peps/pep-0008/)
+
+* All programs are compiled Ubuntu 14.04 LTS using python3 (version 3.4.3).
+* All code conforms to [PEP 8](https://www.python.org/dev/peps/pep-0008/).
 * All your modules should have documentation
-      ```python3 -c 'print(__import__("my_module").__doc__)'```
+  * ```python3 -c 'print(__import__("my_module").__doc__)'```
 
 * All your classes should have documentation
-      ```python3 -c 'print(__import__("my_module").MyClass.__doc__)'```
+  * ```python3 -c 'print(__import__("my_module").MyClass.__doc__)'```
 
 * All your functions (inside and outside a class) should have documentation
-      ```python3 -c 'print(__import__("my_module").my_function.__doc__)'```
-
-      and
-      ```python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)'```
+  * ```python3 -c 'print(__import__("my_module").my_function.__doc__)'```
+  * ```python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)'```
 
 <h4>Unit Test Requirements</h4>
-* Must use [unittest] (https://docs.python.org/3.4/library/unittest.html#module-unittest) module
+
+* Must use [unittest module](https://docs.python.org/3.4/library/unittest.html#module-unittest).
 * All test files inside ```tests``` folder
 * All tests execute with
-      ```python3 -m unittest discover tests```
+  * ```python3 -m unittest discover tests```
 
 * Ability to test file by file
-      ```python3 -m unittest tests/test_models/test_base_model.py```
+  * ```python3 -m unittest tests/test_models/test_base_model.py```
 
 * Must follow documentation requirements listed above.
 
 Authors
 -------
-**Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
-**Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
-**Anne Cognet**, \<anne.cognet@holbertonschool.com>, @1million40
-**Richard Sim**, \<richard.sim@holbertonschool.com>, @rdsim8589
-[**Daniel Bacon**](https://github.com/dfbacon), \<dbacon338@gmail.com>, @dbacon338
+* **Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
+* **Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
+* **Anne Cognet**, \<anne.cognet@holbertonschool.com>, @1million40
+* **Richard Sim**, \<richard.sim@holbertonschool.com>, @rdsim8589
+* [**Daniel Bacon**](https://github.com/dfbacon), \<dbacon338@gmail.com>, @dbacon338
