@@ -17,20 +17,13 @@ To run, execute the console.py script:
    ```python3 console.py``` or ```./console.py```
 
 <h4>Classes</h4>
-
-	* Amenity
-
-	* BaseModel
-
-	* City
-
-	* Place
-
-	* Review
-
-	* State
-
-	* User
+* Amenity
+* BaseModel
+* City
+* Place
+* Review
+* State
+* User
 
 <h4>Base Commands</h4>
 	 * create: Create an instance.
