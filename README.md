@@ -16,7 +16,7 @@ Usage
 To run, execute the console.py script:
 * ```python3 console.py``` or ```./console.py```
 
-<h4>Valid Classes</h4>
+<h4>Valid Classes:</h4>
 * Amenity
 * BaseModel
 * City
