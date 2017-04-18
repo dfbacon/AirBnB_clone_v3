@@ -34,38 +34,32 @@ To run, execute the console.py script:
 
 <h4>Base Commands</h4>
 	 * create: Create an instance.
-	     ```create <class name>```
-
-	     ```<class name>.create(<key>=<value>)```
+	     -> **create <class name>**
+	     -> **<class name>.create(<key>=<value>)**
 
 	 * all: Display all instances of a class.
-	     -> ```all <class name>```
-
-	     -> ```<class name>.all()```
+	     -> **all <class name>**
+	     -> **<class name>.all()**
 
 	 * show: Show information about a specific object.
-	     -> ```show <class name> <unique id>```
-
-	     -> ```<class name>.show(<unique id>)```
+	     -> **show <class name> <unique id>**
+	     -> **<class name>.show(<unique id>)**
 
 	 * update: Update an instance of a class.
-	     -> ```update <class name> <unique id> <attribute name> <attribute value>```
-
-             -> ```<class name>.update(<unique id>, <attribute name>, <attribute value>)```
-
-             -> ```<class name>.update(<unique id>, <dictionary representation>)```
+	     -> **update <class name> <unique id> <attribute name> <attribute value>**
+             -> **<class name>.update(<unique id>, <attribute name>, <attribute value>)**
+             -> **<class name>.update(<unique id>, <dictionary representation>)**
 
 	 * destory: Destroy an instance of a class.
-	     -> ```destroy <class name> <unique id>```
-
-	     -> ```<class name>.destroy(<unique id>)```
+	     -> **destroy <class name> <unique id>**
+	     -> **<class name>.destroy(<unique id>)**
 
 	 * quit: Exit the program.
-	     -> ```quit```
+	     -> **quit**
 
 <h4>Additional Commands</h4>
 	 * count: Count and display the number of instances of a given class.
-	     -> ```<class name>.count()```
+	     -> **<class name>.count()**
 
 Versions
 --------
@@ -85,7 +79,7 @@ Project Requirements
 --------------------
 <h4>Python Requirements</h4>
 * All programs are compiled Ubuntu 14.04 LTS using python3 (version 3.4.3)
-* All code conforms to [PEP 8](https://www.python.org/dev/peps/pep-0008/)
+* All code conforms to [PEP 8] (https://www.python.org/dev/peps/pep-0008/)
 * All your modules should have documentation
       ```python3 -c 'print(__import__("my_module").__doc__)'```
 
@@ -99,7 +93,7 @@ Project Requirements
       ```python3 -c 'print(__import__("my_module").MyClass.my_function.__doc__)'```
 
 <h4>Unit Test Requirements</h4>
-* Must use [unittest](https://docs.python.org/3.4/library/unittest.html#module-unittest) module
+* Must use [unittest] (https://docs.python.org/3.4/library/unittest.html#module-unittest) module
 * All test files inside ```tests``` folder
 * All tests execute with
       ```python3 -m unittest discover tests```
