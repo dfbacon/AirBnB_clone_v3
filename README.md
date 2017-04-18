@@ -24,20 +24,19 @@ To run, execute the console.py script:
 
 	* City
 
-        * Place
+	* Place
 
-        * Review
+	* Review
 
 	* State
 
-        * User
+	* User
 
 <h4>Base Commands</h4>
-
 	 * create: Create an instance.
-	     -> ```create <class name>```
+	     ```create <class name>```
 
-	     -> ```<class name>.create(<key>=<value>)```
+	     ```<class name>.create(<key>=<value>)```
 
 	 * all: Display all instances of a class.
 	     -> ```all <class name>```
