@@ -29,12 +29,12 @@ To run, execute the console.py script:
 <h4>Base Commands</h4>
 
 * create: Create an instance.
-  * **create <class name>**
-  * **<class name>.create(<key>=<value>)**
+  * ```create <class name>```
+  * ```<class name>.create(<key>=<value>)```
 
 * all: Display all instances of a class.
-  * **all <class name>**
-  * **<class name>.all()**
+  * ```all <class name>```
+  * ```<class name>.all()```
 
 * show: Show information about a specific object.
   * **show <class name> <unique id>**
