@@ -27,33 +27,35 @@ To run, execute the console.py script:
 * User
 
 <h4>Base Commands</h4>
-	 * create: Create an instance.
-	     -> **create <class name>**
-	     -> **<class name>.create(<key>=<value>)**
 
-	 * all: Display all instances of a class.
-	     -> **all <class name>**
-	     -> **<class name>.all()**
+* create: Create an instance.
+  * **create <class name>**
+  * **<class name>.create(<key>=<value>)**
 
-	 * show: Show information about a specific object.
-	     -> **show <class name> <unique id>**
-	     -> **<class name>.show(<unique id>)**
+* all: Display all instances of a class.
+  * **all <class name>**
+  * **<class name>.all()**
 
-	 * update: Update an instance of a class.
-	     -> **update <class name> <unique id> <attribute name> <attribute value>**
-             -> **<class name>.update(<unique id>, <attribute name>, <attribute value>)**
-             -> **<class name>.update(<unique id>, <dictionary representation>)**
+* show: Show information about a specific object.
+  * **show <class name> <unique id>**
+  * **<class name>.show(<unique id>)**
 
-	 * destory: Destroy an instance of a class.
-	     -> **destroy <class name> <unique id>**
-	     -> **<class name>.destroy(<unique id>)**
+* update: Update an instance of a class.
+  * **update <class name> <unique id> <attribute name> <attribute value>**
+  * **<class name>.update(<unique id>, <attribute name>, <attribute value>)**
+  * **<class name>.update(<unique id>, <dictionary representation>)**
 
-	 * quit: Exit the program.
-	     -> **quit**
+* destory: Destroy an instance of a class.
+  * **destroy <class name> <unique id>**
+  * **<class name>.destroy(<unique id>)**
+
+* quit: Exit the program.
+  * **quit**
 
 <h4>Additional Commands</h4>
-	 * count: Count and display the number of instances of a given class.
-	     -> **<class name>.count()**
+
+* count: Count and display the number of instances of a given class.
+  * **<class name>.count()**
 
 Versions
 --------
