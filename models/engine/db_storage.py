@@ -102,4 +102,10 @@ class DBStorage:
         Returns number of objects in storage matching a given class name;
         counts all objects if no name is passed.
         '''
-        pass
+        if cls is None:
+            count = 0
+            for i in self.__models_available.values():
+                count += self.__session.query(i).count()
+            return total
+        if cls in self.__models_available.keys():
+            return self.__session.query(self.__models_available[cls]).count()
