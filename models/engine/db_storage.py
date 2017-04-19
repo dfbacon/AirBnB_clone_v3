@@ -106,7 +106,7 @@ class DBStorage:
             count = 0
             for i in self.__models_available.values():
                 count += self.__session.query(i).count()
-            return total
+            return count
         if cls in self.__models_available.keys():
             return self.__session.query(self.__models_available[cls]).count()
         return -1
