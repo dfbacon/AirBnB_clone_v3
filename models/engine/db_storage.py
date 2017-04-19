@@ -91,7 +91,9 @@ class DBStorage:
         get retrieves one object.
         Returns the object based on class name and ID; or None.
         '''
-        pass
+        if cls not in self.__models_available:
+            return None
+        return self.__session.query(self.__models_available[cls]).get(id_)
 
     def count(self, cls=None):
         '''This is the 'count' method.
