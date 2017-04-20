@@ -93,7 +93,7 @@ class DBStorage:
         '''
         if cls not in self.__models_available:
             return None
-        return self.__session.query(self.__models_available[cls]).get(id_)
+        return self.__session.query(self.__models_available[cls]).get(uid)
 
     def count(self, cls=None):
         '''This is the 'count' method.
