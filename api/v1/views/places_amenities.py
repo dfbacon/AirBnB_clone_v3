@@ -22,6 +22,13 @@ if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
 
         Recalls all Amenity objects in a given place.
         '''
+        place = storage.get("Place", place_id)
+        if place is None:
+            abort(404)
+
+        amenity = [storage.get("Amenity", i) for i in place.amenities]
+        return jsonify(amenity)
+
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
                      methods=['DELETE'])
@@ -46,6 +53,13 @@ else:
 
         Recalls all Amenity objects in a given place.
         '''
+        place = storage.get("Place", place_id)
+        if place is None:
+            abort(404)
+
+        amenity = [instance.to_json() for instance in place.amenities]
+        return jsonify(amenity)
+
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
                      methods=['DELETE'])
