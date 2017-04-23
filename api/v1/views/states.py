@@ -79,3 +79,20 @@ def update_state(state_id=None):
 
     Updates a State object.
     '''
+    try:
+        r = request.get_json()
+    except:
+        return "Not a JSON", 400
+
+    state = storage.get("State", state_id)
+    if state is None:
+        abort(404)
+
+    for instance in ("id", "created_at", "updated_at"):
+        r.pop(instance, None)
+
+    for key, value in r.items():
+        setattr(state, key, value)
+
+    state.save()
+    return jsonify(state.to_json()), 200
