@@ -17,6 +17,9 @@ def view_all_states():
 
     Lists all State objects.
     '''
+    states = [state.to_json() for state in storage.all("State").values()]
+    return jsonify(states)
+
 
 @app_views.route('/states/<state_id>', methods=['GET'])
 def view_one_state(state_id=None):
