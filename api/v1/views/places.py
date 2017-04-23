@@ -12,18 +12,31 @@ from flask import (abort, jsonify, make_response, request)
 
 
 @app_views.route('/cities/<city_id>/places/', methods=['GET'])
-def view_places_in_city(city_id):
-    '''This is the 'view_places_in_city' method.
+def view_places(city_id):
+    '''This is the 'view_places' method.
 
     Lists all Place objects in a given city.
     '''
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
+
+    places = [place.to_json() for place in city.places]
+    return jsonify(places)
+
 
 @app_views.route('/places/<place_id>/', methods=['GET'])
-def view_place(place_id=None):
-    '''This is the 'view_place' method.
+def view_single_place(place_id=None):
+    '''This is the 'view_single_place' method.
 
     Retrieves data on a given Place object.
     '''
+    place = storage.get("Place", place_id)
+    if place is None:
+        abort(404)
+
+    return jsonify(place.to_json())
+
 
 @app_views.route('/places/<place_id>/', methods=['DELETE'])
 def delete_place(place_id=None):
