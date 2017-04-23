@@ -12,11 +12,18 @@ from flask import (abort, jsonify, request)
 
 
 @app_views.route("/states/<state_id>/cities", methods=["GET"])
-def state_all_cities(state_id):
-    '''This is the 'state_all_cities' method.
+def all_cities(state_id):
+    '''This is the 'all_cities' method.
 
     Returns all City objects linked to a given State.
     '''
+    state = storage.get("State", state_id)
+    if state is None:
+        abort(404)
+
+    cities = [city.to_json() for city in state.cities]
+    return jsonify(cities)
+
 
 @app_views.route("/cities/<city_id>", methods=["GET"])
 def one_city(city_id):
@@ -24,6 +31,12 @@ def one_city(city_id):
 
     Returns a matching City object.
     '''
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
+
+    return jsonify(city.to_json())
+
 
 @app_views.route("/cities/<city_id>", methods=["DELETE"])
 def delete_one_city(city_id):
