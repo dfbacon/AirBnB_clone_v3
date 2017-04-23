@@ -60,6 +60,18 @@ def create_state():
 
     Creates a State object.
     '''
+    try:
+        r = request.get_json()
+    except:
+        return "Not a JSON", 400
+
+    if 'name' not in r.keys():
+        return "Missing name", 400
+
+    state = State(**r)
+    state.save()
+    return jsonify(state.to_json()), 201
+
 
 @app_views.route('/states/<state_id>', methods=['PUT'])
 def update_state(state_id=None):
