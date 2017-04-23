@@ -17,6 +17,13 @@ def all_reviews(place_id):
 
     Compiles a list of all Review objects of a given place.
     '''
+    place = storage.get("Place", place_id)
+    if place is None:
+        abort(404)
+
+    reviews = [review.to_json() for review in place.reviews]
+    return jsonify(reviews)
+
 
 @app_views.route("/reviews/<review_id>", methods=["GET"])
 def single_review(review_id):
@@ -24,6 +31,12 @@ def single_review(review_id):
 
     Returns a single Review object of a given place.
     '''
+    review = storage.get("Review", review_id)
+    if review is None:
+        abort(404)
+
+    return jsonify(review.to_json())
+
 
 @app_views.route("/reviews/<review_id>", methods=["DELETE"])
 def delete_single_review(review_id):
