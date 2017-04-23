@@ -78,3 +78,20 @@ def update_one_city(city_id):
 
     Update a given City object.
     '''
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
+
+    try:
+        r = request.get_json()
+    except:
+        return "Not a JSON", 400
+
+    for instance in ("id", "created_at", "updated_at", "state_id"):
+        r.pop(instance, None)
+
+    for key, value in r.items():
+        setattr(city, key, value)
+
+    city.save()
+    return jsonify(city.to_json()), 200
