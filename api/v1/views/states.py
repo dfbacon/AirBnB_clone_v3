@@ -22,11 +22,20 @@ def view_all_states():
 
 
 @app_views.route('/states/<state_id>', methods=['GET'])
-def view_one_state(state_id=None):
-    '''This is the 'view_one_state' method.
+def view_single_state(state_id=None):
+    '''This is the 'view_single_state' method.
 
     Retrieves data on a single given State object.
     '''
+    if state_id is None:
+        abort(404)
+
+    state = storage.get("State", state_id)
+    if state is None:
+        abort(404)
+
+    return jsonify(state.to_json())
+
 
 @app_views.route('/states/<state_id>', methods=['DELETE'])
 def delete_state(state_id=None):
@@ -34,6 +43,16 @@ def delete_state(state_id=None):
 
     Deletes a State object.
     '''
+    if state_id is None:
+        abort(404)
+
+    state = storage.get("State", state_id)
+    if state is None:
+        abort(404)
+
+    storage.delete(state)
+    return jsonify({}), 200
+
 
 @app_views.route('/states/', methods=['POST'])
 def create_state():
