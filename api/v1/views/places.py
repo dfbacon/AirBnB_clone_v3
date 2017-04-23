@@ -44,6 +44,13 @@ def delete_place(place_id=None):
 
     Deletes a Place object.
     '''
+    place = storage.get("Place", place_id)
+    if place is None:
+        abort(404)
+
+    storage.delete(place)
+    return jsonify({}), 200
+
 
 @app_views.route('/cities/<city_id>/places/', methods=['POST'])
 def create_place(city_id):
@@ -51,6 +58,31 @@ def create_place(city_id):
 
     Creates a Place object.
     '''
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
+
+    try:
+        r = request.get_json()
+
+    except:
+        return "Not a JSON", 400
+
+    if 'user_id' not in r.keys():
+        return "Missing user_id", 400
+
+    user = storage.get("User", r["user_id"])
+    if user is None:
+        abort(404)
+
+    if 'name' not in r.keys():
+        return "Missing name", 400
+
+    r["city_id"] = city_id
+    place = Place(**r)
+    place.save()
+    return jsonify(place.to_json()), 201
+
 
 @app_views.route('/places/<place_id>/', methods=['PUT'])
 def update_place(place_id=None):
