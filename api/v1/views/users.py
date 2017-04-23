@@ -18,6 +18,16 @@ def view_user(user_id=None):
 
     Retrieves a User object.
     '''
+    if user_id is None:
+        users = [state.to_json() for state in storage.all("User").values()]
+        return jsonify(users)
+
+    user = storage.get("User", user_id)
+    if user is None:
+        abort(404)
+
+    return jsonify(user.to_json())
+
 
 @app_views.route('/users/<user_id>', methods=['DELETE'])
 def delete_user(user_id=None):
@@ -25,6 +35,13 @@ def delete_user(user_id=None):
 
     Deletes a single User object.
     '''
+    user = storage.get("User", user_id)
+    if user is None:
+        abort(404)
+
+    storage.delete(user)
+    return jsonify({}), 200
+
 
 @app_views.route('/users/', methods=['POST'])
 def create_user():
@@ -32,6 +49,22 @@ def create_user():
 
     Creates a new User object.
     '''
+    try:
+        r = request.get_json()
+
+    except:
+        return "Not a JSON", 400
+
+    if 'email' not in r.keys():
+        return "Missing email", 400
+
+    if 'password' not in r.keys():
+        return "Missing password", 400
+
+    user = User(**r)
+    user.save()
+    return jsonify(user.to_json()), 201
+
 
 @app_views.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id=None):
