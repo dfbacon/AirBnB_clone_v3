@@ -44,6 +44,13 @@ def delete_one_city(city_id):
 
     Deletes a single City object.
     '''
+    city = storage.get("City", city_id)
+    if city is None:
+        abort(404)
+
+    storage.delete(city)
+    return jsonify({}), 200
+
 
 @app_views.route("/states/<state_id>/cities", methods=["POST"])
 def create_one_city(state_id):
@@ -51,6 +58,19 @@ def create_one_city(state_id):
 
     Creates a single City object.
     '''
+    try:
+        r = request.get_json()
+    except:
+        return "Not a JSON", 400
+
+    if 'name' not in r.keys():
+        return "Missing name", 400
+
+    city = City(**r)
+    city.state_id = state_id
+    city.save()
+    return jsonify(city.to_json()), 201
+
 
 @app_views.route("/cities/<city_id>", methods=["PUT"])
 def update_one_city(city_id):
