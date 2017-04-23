@@ -72,3 +72,21 @@ def update_user(user_id=None):
 
     Updates a User object.
     '''
+    try:
+        r = request.get_json()
+
+    except:
+        return "Not a JSON", 400
+
+    user = storage.get("User", user_id)
+    if user is None:
+        abort(404)
+
+    for instance in ("id", "email", "created_at", "updated_at"):
+        r.pop(instance, None)
+
+    for key, value in r.items():
+        setattr(user, key, value)
+
+    user.save()
+    return jsonify(a.to_json()), 200
