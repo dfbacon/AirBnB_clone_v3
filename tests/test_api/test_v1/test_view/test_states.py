@@ -22,8 +22,8 @@ def get_json(response):
     return json.loads(str(response.get_data(), encoding="utf-8"))
 
 
-class TestStates(unittest.TestCase):
-    '''This is the 'TestStates' class.
+class TestStatesView(unittest.TestCase):
+    '''This is the 'TestStatesView' class.
 
     Contains tests for the 'states' module.
     '''
