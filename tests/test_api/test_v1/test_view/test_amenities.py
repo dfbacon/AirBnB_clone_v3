@@ -22,8 +22,8 @@ def get_json(response):
     return json.loads(str(response.get_data(), encoding="utf-8"))
 
 
-class TestAmenity(unittest.TestCase):
-    '''This is the TestAmenity class.
+class TestAmenityView(unittest.TestCase):
+    '''This is the TestAmenityView class.
 
     Contains tests for the 'amenities' mdoule.
     '''

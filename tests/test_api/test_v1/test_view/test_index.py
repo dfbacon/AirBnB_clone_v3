@@ -21,8 +21,8 @@ def get_json(response):
     return json.loads(str(response.get_data(), encoding="utf-8"))
 
 
-class TestIndex(unittest.TestCase):
-    '''This is the 'TestIndex' class.
+class TestIndexView(unittest.TestCase):
+    '''This is the 'TestIndexView' class.
 
     Contains tests for the 'index' module.
     '''
