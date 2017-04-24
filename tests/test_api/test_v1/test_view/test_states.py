@@ -51,7 +51,7 @@ class TestStatesView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertTrue(type(json_format), list)
         self.assertIn(state_args["name"], [e.get("name") for e in json_format])
         storage.delete(state)
@@ -69,7 +69,7 @@ class TestStatesView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), state_args["name"])
         self.assertEqual(json_format.get("id"), state_args["id"])
         storage.delete(state)
@@ -101,7 +101,7 @@ class TestStatesView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format, {})
         self.assertIsNone(storage.get("State", state_args["id"]))
 
@@ -132,7 +132,7 @@ class TestStatesView(unittest.TestCase):
         self.assertEqual(rv.status_code, 201)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), state_args["name"])
         self.assertEqual(json_format.get("id"), state_args["id"])
 
@@ -182,7 +182,7 @@ class TestStatesView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), "T")
         self.assertEqual(json_format.get("id"), state_args["id"])
         storage.delete(state)
@@ -203,7 +203,7 @@ class TestStatesView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), state_args["name"])
         self.assertEqual(json_format.get("id"), state_args["id"])
         storage.delete(state)
