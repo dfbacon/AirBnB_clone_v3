@@ -52,7 +52,7 @@ class TestAmenityView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertTrue(type(json_format), list)
         self.assertIn(
             amenity_args["name"], [e.get("name") for e in json_format])
@@ -72,7 +72,7 @@ class TestAmenityView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), amenity_args["name"])
         self.assertEqual(json_format.get("id"), amenity_args["id"])
         storage.delete(amenity)
@@ -106,7 +106,7 @@ class TestAmenityView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format, {})
         self.assertIsNone(storage.get("Amenity", amenity_args["id"]))
 
@@ -138,7 +138,7 @@ class TestAmenityView(unittest.TestCase):
         self.assertEqual(rv.status_code, 201)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), amenity_args["name"])
         self.assertEqual(json_format.get("id"), amenity_args["id"])
 
@@ -190,7 +190,7 @@ class TestAmenityView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), "T")
         self.assertEqual(json_format.get("id"), amenity_args["id"])
         storage.delete(amenity)
@@ -211,7 +211,7 @@ class TestAmenityView(unittest.TestCase):
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
-        json_format = getJson(rv)
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("name"), amenity_args["name"])
         self.assertEqual(json_format.get("id"), amenity_args["id"])
         storage.delete(amenity)
