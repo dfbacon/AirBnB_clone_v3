@@ -45,7 +45,8 @@ class TestIndexView(unittest.TestCase):
         rv = self.app.get('{}/status/'.format(self.path))
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
-        json_format = getJson(rv)
+
+        json_format = get_json(rv)
         self.assertEqual(json_format.get("status"), "OK")
 
     def test_stats(self):
@@ -56,7 +57,8 @@ class TestIndexView(unittest.TestCase):
         rv = self.app.get('{}/stats/'.format(self.path))
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
-        json_format = getJson(rv)
+
+        json_format = get_json(rv)
         for e in (
                 "users", "reviews", "cities", "states", "places", "amenities"):
             self.assertIn(e, json_format.keys())
