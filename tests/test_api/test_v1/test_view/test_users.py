@@ -202,6 +202,111 @@ class TestUserView(unittest.TestCase):
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Missing password")
 
+    def test_update_user_first_name(self):
+        '''This is the 'test_update_user_name' method.
+
+        Tests for updating user name using the 'update_user' method.
+        '''
+        user_args = {"first_name": "testName", "id": "TN1",
+                     "email": "testName@test.com", "password": "test"}
+        user = User(**user_args)
+        user.save()
+
+        rv = self.app.put('{}/users/{}/'.format(self.path, user.id),
+                          content_type="application/json",
+                          data=json.dumps({"first_name": "T"}),
+                          follow_redirects=True)
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.headers.get("Content-Type"), "application/json")
+
+        json_format = get_json(rv)
+        self.assertEqual(json_format.get("first_name"), "T")
+        self.assertEqual(json_format.get("id"), user_args["id"])
+        self.assertEqual(json_format.get("email"), user_args["email"])
+        storage.delete(user)
+
+    def test_update_user_id(self):
+        '''This is the 'test_update_user_id' method.
+
+        Tests for updating user_id via the 'update_user' method.
+        '''
+        user_args = {"first_name": "test", "id": "TS1",
+                     "email": "test@test.com", "password": "test"}
+        user = User(**user_args)
+        user.save()
+
+        rv = self.app.put('{}/users/{}/'.format(self.path, user.id),
+                          content_type="application/json",
+                          data=json.dumps({"id": "T"}),
+                          follow_redirects=True)
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.headers.get("Content-Type"), "application/json")
+
+        json_format = get_json(rv)
+        self.assertEqual(json_format.get("first_name"),
+                         user_args["first_name"])
+        self.assertEqual(json_format.get("id"), user_args["id"])
+        self.assertEqual(json_format.get("email"), user_args["email"])
+        storage.delete(user)
+
+    def test_update_user_email(self):
+        '''This is the 'test_update_user_email' method
+
+        Tests for updating user email value.
+        '''
+        user_args = {"first_name": "test", "id": "TS1",
+                     "email": "test@test.com", "password": "test"}
+        user = User(**user_args)
+        user.save()
+        rv = self.app.put('{}/users/{}/'.format(self.path, user.id),
+                          content_type="application/json",
+                          data=json.dumps({"email": "T@t.com"}),
+                          follow_redirects=True)
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.headers.get("Content-Type"), "application/json")
+
+        json_format = get_json(rv)
+        self.assertEqual(json_format.get("first_name"),
+                         user_args["first_name"])
+        self.assertEqual(json_format.get("id"), user_args["id"])
+        self.assertEqual(json_format.get("email"), user_args["email"])
+        storage.delete(user)
+
+    def test_update_user_json_error(self):
+        '''This is the 'test_update_user_json_error' method.
+
+        Tests the 'update_user' method with invalid JSON.
+        '''
+        user_args = {"first_name": "test", "id": "TS2",
+                     "email": "test@test.com", "password": "test"}
+        user = User(**user_args)
+        user.save()
+
+        rv = self.app.put('{}/users/{}/'.format(self.path, user.id),
+                          content_type="application/json",
+                          data={"id": "T"},
+                          follow_redirects=True)
+        self.assertEqual(rv.status_code, 400)
+        self.assertEqual(rv.get_data(), b"Not a JSON")
+        storage.delete(user)
+
+    def test_update_user_id_error(self):
+        '''This is the 'test_update_user_id_error' method.
+
+        Tests the 'update_user' method with an invalid user_id.
+        '''
+        user_args = {"first_name": "test", "id": "TS",
+                     "email": "test@test.com", "password": "test"}
+        user = User(**user_args)
+        user.save()
+
+        rv = self.app.put('{}/users/{}/'.format(self.path, "noID"),
+                          content_type="application/json",
+                          data=json.dumps({"id": "T"}),
+                          follow_redirects=True)
+        self.assertEqual(rv.status_code, 404)
+        storage.delete(user)
+
 
 if __name__ == "__main__":
     unittest.main()
