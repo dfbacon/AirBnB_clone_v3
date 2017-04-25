@@ -61,6 +61,10 @@ class TestStatesView(unittest.TestCase):
 
         Tests the 'view_all_states' method with empty database.
         '''
+        s = storage.all("State").values()
+        for i in s:
+            storage.delete(i)
+
         rv = self.app.get('{}/states/'.format(self.path))
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
@@ -165,6 +169,12 @@ class TestStatesView(unittest.TestCase):
                            follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Not a JSON")
+
+        rv = self.app.post('{}/states/'.format(self.path),
+                           content_type="application/x-www-form-urlencoded",
+                           data=state_args,
+                           follow_redirects=True)
+        self.assertEqual(rv.status_code, 400)
 
     def test_create_state_name_error(self):
         '''This is the 'test_create_state_name_error' method.
