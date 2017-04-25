@@ -37,7 +37,7 @@ class TestUserView(unittest.TestCase):
         '''
         app.config['TESTING'] = True
         cls.app = app.test_client()
-        cls.path="/api/v1"
+        cls.path = "/api/v1"
 
     def test_view_user(self):
         '''This is the 'test_view_user' method.
@@ -78,7 +78,8 @@ class TestUserView(unittest.TestCase):
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
         json_format = get_json(rv)
-        self.assertEqual(json_format.get("first_name"), user_args["first_name"])
+        self.assertEqual(json_format.get(
+            "first_name"), user_args["first_name"])
         self.assertEqual(json_format.get("id"), user_args["id"])
         self.assertEqual(json_format.get("email"), user_args["email"])
         storage.delete(user)
@@ -94,7 +95,7 @@ class TestUserView(unittest.TestCase):
         user.save()
 
         rv = self.app.get('{}/users/{}'.format(self.path, "noID"),
-        follow_redirects=True)
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
         storage.delete(user)
 
@@ -149,7 +150,8 @@ class TestUserView(unittest.TestCase):
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
         json_format = get_json(rv)
-        self.assertEqual(json_format.get("first_name"), user_args["first_name"])
+        self.assertEqual(json_format.get(
+            "first_name"), user_args["first_name"])
         self.assertEqual(json_format.get("id"), user_args["id"])
         self.assertEqual(json_format.get("email"), user_args["email"])
 
