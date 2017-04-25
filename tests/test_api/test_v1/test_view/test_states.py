@@ -36,7 +36,7 @@ class TestStatesView(unittest.TestCase):
         '''
         app.config['TESTING'] = True
         cls.app = app.test_client()
-        cls.path="/api/v1"
+        cls.path = "/api/v1"
 
     def test_view_all_states(self):
         '''This is the 'test_view_all_states' method.
@@ -189,9 +189,9 @@ class TestStatesView(unittest.TestCase):
         state.save()
 
         rv = self.app.put('{}/states/{}/'.format(self.path, state.id),
-                           content_type="application/json",
-                           data=json.dumps({"name": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"name": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -210,9 +210,9 @@ class TestStatesView(unittest.TestCase):
         state.save()
 
         rv = self.app.put('{}/states/{}/'.format(self.path, state.id),
-                           content_type="application/json",
-                           data=json.dumps({"id": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"id": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -231,9 +231,9 @@ class TestStatesView(unittest.TestCase):
         state.save()
 
         rv = self.app.put('{}/states/{}/'.format(self.path, state.id),
-                           content_type="application/json",
-                           data={"id": "T"},
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data={"id": "T"},
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Not a JSON")
         storage.delete(state)
@@ -248,9 +248,9 @@ class TestStatesView(unittest.TestCase):
         state.save()
 
         rv = self.app.put('{}/states/{}/'.format(self.path, "noID"),
-                           content_type="application/json",
-                           data=json.dumps({"id": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"id": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
         storage.delete(state)
 
