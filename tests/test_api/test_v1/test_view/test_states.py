@@ -56,6 +56,19 @@ class TestStatesView(unittest.TestCase):
         self.assertIn(state_args["name"], [e.get("name") for e in json_format])
         storage.delete(state)
 
+    def test_view_all_states_db_error(self):
+        '''This is the 'test_view_all_states_db_error' method.
+
+        Tests the 'view_all_states' method with empty database.
+        '''
+        rv = self.app.get('{}/states/'.format(self.path))
+        self.assertEqual(rv.status_code, 200)
+        self.assertEqual(rv.headers.get("Content-Type"), "application/json")
+
+        json_format = get_json(rv)
+        self.assertTrue(type(json_format), list)
+        self.assertEqual(json_format, [])
+
     def test_view_single_state(self):
         '''This is the 'test_view_single_state' method.
 
