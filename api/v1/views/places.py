@@ -11,7 +11,8 @@ from api.v1.views import (app_views, Place, storage)
 from flask import (abort, jsonify, make_response, request)
 
 
-@app_views.route('/cities/<city_id>/places/', methods=['GET'])
+@app_views.route('/cities/<city_id>/places', methods=['GET'],
+                 strict_slashes=False)
 def view_places(city_id):
     '''This is the 'view_places' method.
 
@@ -25,7 +26,7 @@ def view_places(city_id):
     return jsonify(places)
 
 
-@app_views.route('/places/<place_id>/', methods=['GET'])
+@app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
 def view_single_place(place_id=None):
     '''This is the 'view_single_place' method.
 
@@ -38,7 +39,8 @@ def view_single_place(place_id=None):
     return jsonify(place.to_json())
 
 
-@app_views.route('/places/<place_id>/', methods=['DELETE'])
+@app_views.route('/places/<place_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_place(place_id=None):
     '''This is the 'delete_place' method.
 
@@ -52,7 +54,8 @@ def delete_place(place_id=None):
     return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places/', methods=['POST'])
+@app_views.route('/cities/<city_id>/places', methods=['POST'],
+                 strict_slashes=False)
 def create_place(city_id):
     '''This is the 'create_place' method.
 
@@ -84,7 +87,7 @@ def create_place(city_id):
     return jsonify(place.to_json()), 201
 
 
-@app_views.route('/places/<place_id>/', methods=['PUT'])
+@app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
 def update_place(place_id=None):
     '''This is the 'update_place' method.
 
