@@ -11,7 +11,7 @@ from api.v1.views import (app_views, State, storage)
 from flask import (abort, jsonify, make_response, request)
 
 
-@app_views.route('/states/', methods=['GET'])
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def view_all_states():
     '''This is the 'view_all_states' method.
 
@@ -21,7 +21,7 @@ def view_all_states():
     return jsonify(states)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'])
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slases=False)
 def view_single_state(state_id=None):
     '''This is the 'view_single_state' method.
 
@@ -37,7 +37,8 @@ def view_single_state(state_id=None):
     return jsonify(state.to_json())
 
 
-@app_views.route('/states/<state_id>/', methods=['DELETE'])
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_state(state_id=None):
     '''This is the 'delete_state' method.
 
@@ -54,7 +55,7 @@ def delete_state(state_id=None):
     return jsonify({}), 200
 
 
-@app_views.route('/states/', methods=['POST'])
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     '''This is the 'create_state' method.
 
@@ -73,7 +74,7 @@ def create_state():
     return jsonify(state.to_json()), 201
 
 
-@app_views.route('/states/<state_id>/', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id=None):
     '''This is the 'update_state' module.
 
