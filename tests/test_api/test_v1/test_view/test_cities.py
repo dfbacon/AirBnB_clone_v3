@@ -37,7 +37,7 @@ class TestCityView(unittest.TestCase):
         '''
         app.config['TESTING'] = True
         cls.app = app.test_client()
-        cls.path="/api/v1"
+        cls.path = "/api/v1"
         cls.state_args = {"name": "Test", "id": "TS"}
         cls.state = State(**cls.state_args)
         cls.state.save()
@@ -126,8 +126,8 @@ class TestCityView(unittest.TestCase):
         city = City(**city_args)
         city.save()
 
-        rv = self.app.delete('{}/cities/{}/'.format(self.path, city_args["id"]),
-                             follow_redirects=True)
+        rv = self.app.delete('{}/cities/{}/'.format(
+            self.path, city_args["id"]), follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -144,8 +144,8 @@ class TestCityView(unittest.TestCase):
         city = City(**city_args)
         city.save()
 
-        rv = self.app.delete('{}/cities/{}/'.format(self.path, "noID"),
-                             follow_redirects=True)
+        rv = self.app.delete('{}/cities/{}/'.format(
+            self.path, "noID"), follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
         storage.delete(city)
 
@@ -227,9 +227,9 @@ class TestCityView(unittest.TestCase):
         city.save()
 
         rv = self.app.put('{}/cities/{}/'.format(self.path, city.id),
-                           content_type="application/json",
-                           data=json.dumps({"name": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"name": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -250,9 +250,9 @@ class TestCityView(unittest.TestCase):
         city.save()
 
         rv = self.app.put('{}/cities/{}/'.format(self.path, city.id),
-                           content_type="application/json",
-                           data=json.dumps({"id": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"id": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -273,9 +273,9 @@ class TestCityView(unittest.TestCase):
         city.save()
 
         rv = self.app.put('{}/cities/{}/'.format(self.path, city.id),
-                           content_type="application/json",
-                           data=json.dumps({"state_id": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"state_id": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.headers.get("Content-Type"), "application/json")
 
@@ -295,9 +295,9 @@ class TestCityView(unittest.TestCase):
         city.save()
 
         rv = self.app.put('{}/cities/{}/'.format(self.path, city.id),
-                           content_type="application/json",
-                           data={"id": "T"},
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data={"id": "T"},
+                          follow_redirects=True)
 
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.get_data(), b"Not a JSON")
@@ -313,9 +313,9 @@ class TestCityView(unittest.TestCase):
         city.save()
 
         rv = self.app.put('{}/cities/{}/'.format(self.path, "noID"),
-                           content_type="application/json",
-                           data=json.dumps({"name": "T"}),
-                           follow_redirects=True)
+                          content_type="application/json",
+                          data=json.dumps({"name": "T"}),
+                          follow_redirects=True)
         self.assertEqual(rv.status_code, 404)
         storage.delete(city)
 
