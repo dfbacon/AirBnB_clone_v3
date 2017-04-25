@@ -21,7 +21,7 @@ def view_all_states():
     return jsonify(states)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'], strict_slases=False)
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def view_single_state(state_id=None):
     '''This is the 'view_single_state' method.
 
