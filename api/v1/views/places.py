@@ -9,6 +9,7 @@ Handles all default RestFul API actions.
 '''
 from api.v1.views import (app_views, Place, storage)
 from flask import (abort, jsonify, make_response, request)
+import os
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
@@ -67,14 +68,16 @@ def create_place(city_id):
 
     try:
         r = request.get_json()
-
     except:
+        r = None
+
+    if r is None:
         return "Not a JSON", 400
 
     if 'user_id' not in r.keys():
         return "Missing user_id", 400
 
-    user = storage.get("User", r["user_id"])
+    user = storage.get("User", r.get("user_id"))
     if user is None:
         abort(404)
 
@@ -95,8 +98,10 @@ def update_place(place_id=None):
     '''
     try:
         r = request.get_json()
-
     except:
+        r = None
+
+    if r is None:
         return "Not a JSON", 400
 
     place = storage.get("Place", place_id)
