@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 '''
 
-This is the 'reviews' module.
+This is the 'places_reviews' module.
 
-reviews is a new view for Review objects.
+places_reviews is a new view for Review objects.
 Handles all default RestFul API actions.
 
 '''
@@ -11,7 +11,8 @@ from api.v1.views import (app_views, Review, storage)
 from flask import (abort, jsonify, request)
 
 
-@app_views.route("/places/<place_id>/reviews", methods=["GET"])
+@app_views.route("/places/<place_id>/reviews", methods=["GET"],
+                 strict_slashes=False)
 def all_reviews(place_id):
     '''This is the 'all_reviews' method.
 
@@ -25,7 +26,8 @@ def all_reviews(place_id):
     return jsonify(reviews)
 
 
-@app_views.route("/reviews/<review_id>", methods=["GET"])
+@app_views.route("/reviews/<review_id>", methods=["GET"],
+                 strict_slashes=False)
 def single_review(review_id):
     '''This is the 'single_review' method.
 
@@ -38,7 +40,8 @@ def single_review(review_id):
     return jsonify(review.to_json())
 
 
-@app_views.route("/reviews/<review_id>", methods=["DELETE"])
+@app_views.route("/reviews/<review_id>", methods=["DELETE"],
+                 strict_slashes=False)
 def delete_single_review(review_id):
     '''This is the 'delete_single_review' method.
 
@@ -52,7 +55,8 @@ def delete_single_review(review_id):
     return jsonify({}), 200
 
 
-@app_views.route("/places/<place_id>/reviews", methods=["POST"])
+@app_views.route("/places/<place_id>/reviews", methods=["POST"],
+                 strict_slashes=False)
 def create_review(place_id):
     '''This is the 'create_review' method.
 
@@ -60,7 +64,6 @@ def create_review(place_id):
     '''
     try:
         r = request.get_json()
-
     except:
         return "Not a JSON", 400
 
@@ -84,7 +87,8 @@ def create_review(place_id):
     return jsonify(review.to_json()), 201
 
 
-@app_views.route("/reviews/<review_id>", methods=["PUT"])
+@app_views.route("/reviews/<review_id>", methods=["PUT"],
+                 strict_slashes=False)
 def update_review(review_id):
     '''This is the 'update_review' method.
 
@@ -96,8 +100,10 @@ def update_review(review_id):
 
     try:
         r = request.get_json()
-
     except:
+        r = None
+
+    if r is None:
         return "Not a JSON", 400
 
     for instance in ("id", "user_id", "place_id", "created_at", "updated_at"):
