@@ -15,7 +15,8 @@ from os import getenv
 from sqlalchemy import inspect
 
 if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
-    @app_views.route('/places/<place_id>/amenities/', methods=['GET'])
+    @app_views.route('/places/<place_id>/amenities/', methods=['GET'],
+                     strict_slashes=False)
     def view_place_amenity(place_id):
         '''This is the 'view_place_amenity' method.
 
@@ -29,7 +30,7 @@ if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
         return jsonify(amenity)
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
-                     methods=['DELETE'])
+                     methods=['DELETE'], strict_slashes=False)
     def delete_place_amenity(place_id=None, amenity_id=None):
         '''This is the 'delete_place_amenity' method.
 
@@ -48,7 +49,7 @@ if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
         return jsonify({}), 200
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
-                     methods=['POST'])
+                     methods=['POST'], strict_slashes=False)
     def create_place_amenity(place_id=None, amenity_id=None):
         '''This is the 'create_place_amenity' method.
 
@@ -70,7 +71,8 @@ if getenv('HBNB_TYPE_STORAGE', 'fs') != 'db':
         return jsonify(amenity.to_json()), 201
 
 else:
-    @app_views.route('/places/<place_id>/amenities/', methods=['GET'])
+    @app_views.route('/places/<place_id>/amenities/', methods=['GET'],
+                     strict_slashes=False)
     def view_amenities_in_place(place_id):
         '''This is the 'view_place_amenity' method.
 
@@ -84,7 +86,7 @@ else:
         return jsonify(amenity)
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
-                     methods=['DELETE'])
+                     methods=['DELETE'], strict_slashes=False)
     def delete_place_amenity(place_id=None, amenity_id=None):
         '''This is the 'delete_place_amenity' method.
 
@@ -103,7 +105,7 @@ else:
         return jsonify({}), 200
 
     @app_views.route('/places/<place_id>/amenities/<amenity_id>/',
-                     methods=['POST'])
+                     methods=['POST'], strict_slashes=False)
     def create_place_amenity(place_id=None, amenity_id=None):
         '''This is the 'create_place_amenity' method.
 
