@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+This module contains the BaseModel class:
+All classes should inherit from this class
+"""
 from datetime import datetime
 import uuid
 import models
@@ -6,10 +10,7 @@ from sqlalchemy import Column, Integer, String, Table, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from os import getenv
 import uuid
-"""
-This module contains the BaseModel class:
-All classes should inherit from this class
-"""
+
 if getenv('HBNB_TYPE_STORAGE', 'fs') == 'db':
     Base = declarative_base()
 else:
@@ -82,7 +83,7 @@ class BaseModel:
         return "[{}] ({}) {}".format(type(self)
                                      .__name__, self.id, self.__dict__)
 
-    def to_json(self):
+    def to_json(self, saving=False):
         """convert to json"""
         dupe = self.__dict__.copy()
         dupe.pop('_sa_instance_state', None)
@@ -92,18 +93,8 @@ class BaseModel:
         if ("updated_at" in dupe):
             dupe["updated_at"] = dupe["updated_at"].isoformat()
         dupe["__class__"] = type(self).__name__
+        if not saving:
+            dupe.pop("password", None)
+        dupe.pop("amenities", None)
+        dupe.pop("amenities_id", None)
         return dupe
-
-
-##    def __setattr__(self, name, value):
-##        """
-##        Forbids update of instance variables
-##        Arguments:
-##        name: name
-##        value: value
-##        """
-##        if name in ("id", "created_at", "updated_at"):
-##            if name in self.__dict__.keys()
-## and self.__dict__[name] is not None:
-##                return
-##        self.__dict__[name] = value
