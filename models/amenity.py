@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel, Base, Table, Column, String
 from os import getenv
+from sqlalchemy.orm import relationship, backref
 """
 amenity module
     contains
