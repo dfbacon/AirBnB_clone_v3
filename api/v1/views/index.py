@@ -12,7 +12,7 @@ from api.v1.views import app_views, storage
 from flask import jsonify
 
 
-@app_views.route('/status')
+@app_views.route('/status/')
 def status():
     '''This is the 'status' method.
 
@@ -21,7 +21,7 @@ def status():
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/stats')
+@app_views.route('/stats/')
 def stats():
     '''This is the 'stats' method.
 
