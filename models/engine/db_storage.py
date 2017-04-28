@@ -1,23 +1,28 @@
 #!/usr/bin/python3
-from models.base_model import Base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import (sessionmaker, scoped_session)
-from os import getenv
-from models.user import User
+"""
+This is the db_storage module.
+This module deals with storing and retrieving data from a mysql database.
+This module contains one class DBStorage.
+"""
 from models.amenity import Amenity
+from models.base_model import Base
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-"""
-This is the db_storage module
-"""
+from models.user import User
+from os import getenv
+from sqlalchemy import (create_engine, func)
+from sqlalchemy.orm import (sessionmaker, scoped_session)
 
 
 class DBStorage:
+    '''This is the 'DBStorage' class.
+
+    Utilizes sqlAlchemy ORM to manage data from MySQL database.
+    '''
     __engine = None
     __session = None
-    __Session = None
 
     def __init__(self):
         """
@@ -41,8 +46,10 @@ class DBStorage:
         """
         orm_objects = {}
         if cls:
-            for k in self.__session.query(self.__models_available[cls]):
-                orm_objects[k.__dict__['id']] = k
+            if cls in self.__models_available:
+                for k in self.__session.query(
+                        self.__models_available.get(cls)):
+                    orm_objects[k.__dict__['id']] = k
         else:
             for i in self.__models_available.values():
                 j = self.__session.query(i).all()
@@ -69,6 +76,7 @@ class DBStorage:
         """
         if obj is not None:
             self.__session.delete(obj)
+            self.__session.commit()
 
     def reload(self):
         """
@@ -91,9 +99,10 @@ class DBStorage:
         get retrieves one object.
         Returns the object based on class name and ID; or None.
         '''
-        if cls not in self.__models_available:
+        if (cls not in self.__models_available) or (uid is None):
             return None
-        return self.__session.query(self.__models_available[cls]).get(uid)
+        return self.__session.query(
+                self.__models_available[cls]).get(uid)
 
     def count(self, cls=None):
         '''This is the 'count' method.
@@ -104,8 +113,8 @@ class DBStorage:
         '''
         if cls is None:
             count = 0
-            for i in self.__models_available.values():
-                count += self.__session.query(i).count()
+            for v in self.__models_available.values():
+                count += self.__session.query(v).count()
             return count
         if cls in self.__models_available.keys():
             return self.__session.query(self.__models_available[cls]).count()
