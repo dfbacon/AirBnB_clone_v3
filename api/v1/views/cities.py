@@ -11,7 +11,8 @@ from api.v1.views import (app_views, City, storage)
 from flask import (abort, jsonify, request)
 
 
-@app_views.route("/states/<state_id>/cities", methods=["GET"])
+@app_views.route("/states/<state_id>/cities", methods=["GET"],
+                 strict_slashes=False)
 def all_cities(state_id):
     '''This is the 'all_cities' method.
 
@@ -25,7 +26,7 @@ def all_cities(state_id):
     return jsonify(cities)
 
 
-@app_views.route("/cities/<city_id>", methods=["GET"])
+@app_views.route("/cities/<city_id>", methods=["GET"], strict_slashes=False)
 def one_city(city_id):
     '''This is the 'one_city' method.
 
@@ -38,7 +39,8 @@ def one_city(city_id):
     return jsonify(city.to_json())
 
 
-@app_views.route("/cities/<city_id>", methods=["DELETE"])
+@app_views.route("/cities/<city_id>", methods=["DELETE"],
+                 strict_slashes=False)
 def delete_one_city(city_id):
     '''This is the 'delete_one_city' method.
 
@@ -52,7 +54,8 @@ def delete_one_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route("/states/<state_id>/cities", methods=["POST"])
+@app_views.route("/states/<state_id>/cities", methods=["POST"],
+                 strict_slashes=False)
 def create_one_city(state_id):
     '''This is the 'create_one_city' method.
 
@@ -61,10 +64,16 @@ def create_one_city(state_id):
     try:
         r = request.get_json()
     except:
-        return "Not a JSON", 400
+        r = None
 
+    if r is None:
+        return "Not a JSON", 400
     if 'name' not in r.keys():
         return "Missing name", 400
+
+    state = storage.get("State", state_id)
+    if state is None:
+        abort(404)
 
     city = City(**r)
     city.state_id = state_id
@@ -72,7 +81,7 @@ def create_one_city(state_id):
     return jsonify(city.to_json()), 201
 
 
-@app_views.route("/cities/<city_id>", methods=["PUT"])
+@app_views.route("/cities/<city_id>", methods=["PUT"], strict_slashes=False)
 def update_one_city(city_id):
     '''This is the 'update_one_city' method.
 
@@ -85,6 +94,9 @@ def update_one_city(city_id):
     try:
         r = request.get_json()
     except:
+        r = None
+
+    if r is None:
         return "Not a JSON", 400
 
     for instance in ("id", "created_at", "updated_at", "state_id"):
